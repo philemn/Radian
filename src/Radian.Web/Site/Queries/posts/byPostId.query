@@ -1,0 +1,4 @@
+﻿{
+    map: "from item in content(\"posts\") where item.Data.id == (string)tokens[\"postId\"] select item",
+    limit: 10
+}

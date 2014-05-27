@@ -1,0 +1,35 @@
+﻿{
+    id: "a-query-tool",
+    date: "2014-05-21 21:42:00",
+    title: "A Query Tool for Content",
+    author: "Phil Klein",
+    tags: ["Radian", "Query"]
+}
+
+<p>
+    When I started Radian I thought that Queries would be a nice to have.  After having implemented
+    them I feel confident I feel validated in that opinion.  Radian originally existed after a few
+    hours of hacking.  I had the basics implement: Content Items, Pages, and Views.  This was
+    arguably enough to build this blog with although it felt rather trivial.  After all, I could
+    have come extremely close with a bunch of static HTML pages.  For years I have viewed Content
+    Queries as a powerful piece of a CMS platform.  I knew I needed to make them work somehow.
+</p>
+<p>
+    If you're not familiar with the inner-workings of Radian, allow me to bring you up to speed.
+    Radian works with a general text file format.  The file begins with a JSON header and then
+    optionally contains any other free-form content.  Content Items, Pages, and Layouts all share
+    this file format.  When I set out to define a Query file, it seemed logical to choose the same
+    file format.  Queries are defined as simple JSON files.  Currently the JSON has terrible
+    property names, "map" and "limit", but these are likely to change and other properties may be
+    added if necessary.  The thought though was that it would be great to define queries in a syntax
+    similar to LINQ, but taking care of the tasks of parsing such a query would prove challenging ...
+    until Roslyn.
+</p>
+<p>
+    I realized that with Roslyn I could build a tool that would query against Radian files on disk
+    using actual LINQ expressions.  The current Radian codebase is in need of some serious
+    refactoring at the moment.  If you take a look you'll see that I took what was a command-line
+    tool for querying content and slapped it into the web framework.  At some point in the future
+    I'll break that out into it's own utility.  If you're feeling adventurous, feel free to send me a
+    pull request.
+</p>

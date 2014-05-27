@@ -1,0 +1,17 @@
+﻿<!-- the actual blog post: title/author/date/content -->
+<h1>
+  <a href="/post/@Content.id">@Content.title</a>
+</h1>
+<p class="lead">
+  by @Content.author
+</p>
+<hr />
+<p>
+  <span class="glyphicon glyphicon-time"></span> Posted on @Format.Date(Content.date, "MMM dd, yyyy 'at' h:mm tt")
+</p>
+<hr />
+<!--
+<img src="http://placehold.it/900x300" class="img-responsive" />
+<hr />
+-->
+@RenderContent()

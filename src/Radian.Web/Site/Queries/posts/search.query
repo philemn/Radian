@@ -1,0 +1,5 @@
+﻿{
+	map: "from item in search((string)tokens[\"q\"], \"posts\")
+	      select item",
+	limit: 10
+}

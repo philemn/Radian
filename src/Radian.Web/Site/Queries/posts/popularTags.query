@@ -1,0 +1,11 @@
+﻿{
+	map: "from tag in content(\"posts\").SelectMany<ContentItem, object>(x => x.Data.tags).Cast<string>().ToLookup(x => x)
+          let count = tag.Count()
+		  orderby count descending
+		  select computed(new
+          {
+              tag = tag.Key,
+              count = tag.Count()
+          })",
+	limit: 10
+}

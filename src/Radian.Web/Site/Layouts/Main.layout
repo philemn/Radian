@@ -1,0 +1,104 @@
+﻿{
+    placeholders: {}
+}
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>@Page.Title</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/css/site.css" rel="stylesheet" />
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Radian Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="/#about">About</a>
+            </li>
+            <li>
+              <a href="/#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          @RenderBody()
+        </div>
+        <div class="col-lg-4">
+          <div class="well">
+            <h4>Blog Search</h4>
+            <form action="/search" method="get">
+              <div class="input-group">
+                <input type="text" name="q" class="form-control" />
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                  </button>
+                </span>
+              </div>
+            </form>
+            <!-- /input-group -->
+          </div>
+          <!-- /well -->
+          <div class="well">
+            <h4>Popular Blog Categories</h4>
+            <div class="row">
+
+              <ul class="list-unstyled">
+                @foreach (var tag in Query("queries/posts/popularTags.query").Select(x => x.Data.tag))
+                {
+                <li class="col-lg-6">
+                  <a href="/tag/@UrlEncode(tag)">@tag</a>
+                </li>
+                }
+              </ul>
+
+            </div>
+          </div>
+          <!-- /well -->
+        </div>
+      </div>
+      <hr />
+
+      <footer>
+        <div class="row">
+          <small class="col-lg-12 text-center">
+            - Proudly brought to you by Radian -
+          </small>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- JavaScript -->
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.js"></script>
+  </body>
+</html>

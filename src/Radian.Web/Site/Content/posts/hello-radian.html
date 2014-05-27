@@ -1,0 +1,69 @@
+﻿{
+    id: "hello-radian",
+    date: "2014-05-19 20:23:00",
+    title: "Hello Radian",
+    author: "Phil Klein",
+    tags: ["Radian"]
+}
+
+<p>
+	It's tough to pinpoint exactly where the inspiration for Radian came from.  Content management is
+	something that has been pretty near and dear to my heart for quite some time.  I have long felt
+	that the majority of solutions available are overly complex and unnatural to use for either the
+	developers or content authors.  Radian doesn't seek to directly solve all of that.  Instead,
+	Radian is simply a conscious choice to choose simplicity over complexity and extensibility over
+	opinion.
+</p>
+<p>
+    When I sat down to think about what made sense to me in a content management system I came up with
+	a limited set of core concepts:
+</p>
+<ul>
+    <li>
+	    <strong>Content Items</strong> &ndash;
+		Files stored on disk in a Site folder that begin with a JSON header that contains what other
+		content management systems refer to as fields or properties.  Beneath that is free-form body
+		content.  Many content management systems do nothing more than manage the display of chunks
+		of HTML.  Radian can do that too, but that's just an option.
+    </li>
+	<li>
+	    <strong>Pages</strong> &ndash;
+		This concept should be pretty obvious.  Pages define what content gets displayed at a given
+		URL.  The specified url can contain tokens which can be used in Queries which are described
+		below.
+    </li>
+	<li>
+	    <strong>Layouts</strong> &ndash;
+		Like a WordPress theme, a Layout is an HTML document which specifies where specific sections
+		of a Page should be displayed.  If you're not familiar with WordPress, think master pages
+		or Razor layouts.
+	</li>
+	<li>
+	    <strong>Views</strong> &ndash;
+		A piece of content can take many different forms on a dynamic website.  It can be presented
+		in a summary of search results or in a full-blown detail view.  Views are used to transform
+		content into a specific HTML represenation.
+	</li>
+	<li>
+	    <strong>Queries</strong> &ndash;
+		With the 4 items above, it would be perfectly possible to built a static website.  This has
+		been done several times and done very well I might add.  Radian allows you to describe
+		queries over your content so that you can choose which Content Item or Items should be
+		displayed.  Radian supports a very robust language for Queries which I will go into more
+		detail about in a later post.  For now just know that Radian supports LINQ queries and also
+		supports Full-Text searching over Content Items.
+	</li>
+</ul>
+<p>
+    Radian is a proof-of-concept, and it's bringing you this blog.  The concept has been proven but
+	I plan to continue to build upon it.  I believe that there are several interesting scenarios
+	for Radian.  I hope that people see enough potential in the Radian platform to build their own
+	management tools.  Although this blog is running on Radian, it has been put together by simply
+	creating and modifying files on my machine.  It would be exciting to see people build tools
+	which define types of content and editors for creating Content Items.
+</p>
+<p>
+    I hope that's enough of an intro to generate some interest.  If you have any questions, feel
+	free to contact me via Twitter <a href="https://twitter.com/philemn">@philemn</a> or on
+    <a href="https://github.com/philemn/Radian">GitHub</a>.
+</p>

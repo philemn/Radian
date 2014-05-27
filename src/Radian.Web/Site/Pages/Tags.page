@@ -1,0 +1,13 @@
+﻿{
+    url: "/tag/{tagName}",
+	layout: "layouts/Main.layout",
+    title: "Posts by Tag",
+    placeholders: {
+        body: [{
+            view: "views/postSummary.view",
+            data: "queries/posts/postsByTagName.query"
+        }],
+    }
+}
+
+@Placeholder("body")

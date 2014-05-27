@@ -1,0 +1,7 @@
+﻿{
+    map: "from item in content(\"posts\")
+	      where item.Data.tags.Contains((string)tokens[\"tagName\"])
+	      orderby item.Data.date descending
+		  select item",
+    limit: 10
+}

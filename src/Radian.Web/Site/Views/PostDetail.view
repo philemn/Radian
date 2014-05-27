@@ -1,0 +1,36 @@
+﻿<!-- the actual blog post: title/author/date/content -->
+<h1>@Content.title</h1>
+<p class="lead">
+  by @Content.author
+</p>
+<hr />
+<p>
+  <span class="glyphicon glyphicon-time"></span> Posted on @Format.Date(Content.date, "MMM dd, yyyy 'at' h:mm tt")
+</p>
+<hr />
+<!--
+<img src="http://placehold.it/900x300" class="img-responsive" />
+<hr />
+-->
+@RenderContent()
+<hr />
+
+<!-- the comment box -->
+<div class="well">
+  <h4>Leave a Comment:</h4>
+  <form role="form">
+    <div class="form-group">
+      <textarea class="form-control" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<hr />
+
+<!-- the comments -->
+<h3>
+  Not a real comment
+  <small>10:41 AM on May 24, 2014</small>
+</h3>
+<p>I promise I'll get comments hooked up once I actually get this site hosted.  I should probably do that ...</p>

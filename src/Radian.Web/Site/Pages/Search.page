@@ -1,0 +1,14 @@
+﻿{
+    url: "/search",
+    title: "Phil's Blog",
+	layout: "layouts/Main.layout",
+    placeholders: {
+        "body": 
+		    [{
+				view: "views/postSummary.view",
+				data: "queries/posts/search.query"
+			}]
+    }
+}
+
+@Placeholder("body")

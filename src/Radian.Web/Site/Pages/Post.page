@@ -1,0 +1,13 @@
+﻿{
+    url: "/post/{postId}",
+    title: "????",
+	layout: "layouts/Main.layout",
+    placeholders: {
+        "body": [{
+            view: "views/postDetail.view",
+            data: "queries/posts/byPostId.query"
+        }]
+    }
+}
+
+@Placeholder("body")
