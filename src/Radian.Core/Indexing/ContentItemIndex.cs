@@ -27,7 +27,7 @@ namespace Radian.Core.Indexing
             _rootPath = locator.RootPath;
             _locator = locator;
             _indexer = new ContentItemIndexer();
-            _watcher = SetupWatcher();
+            _watcher = SetupWatcher(locator.RootPath, path);
             IndexContent(path);
         }
 
@@ -57,10 +57,11 @@ namespace Radian.Core.Indexing
             }
         }
 
-        private FileSystemWatcher SetupWatcher()
+        private FileSystemWatcher SetupWatcher(string rootPath, string path)
         {
             var watcher = new FileSystemWatcher
             {
+                Path = Path.Combine(rootPath, path),
                 IncludeSubdirectories = true,
                 NotifyFilter = NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.LastWrite | NotifyFilters.Size
             };
@@ -68,6 +69,8 @@ namespace Radian.Core.Indexing
             watcher.Changed += OnChanged;
             watcher.Created += OnCreated;
             watcher.Deleted += OnDeleted;
+
+            watcher.EnableRaisingEvents = true;
 
             return _watcher;
         }
