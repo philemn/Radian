@@ -20,7 +20,6 @@ namespace Radian.Core.Indexing
         private const string ID_FIELD = "__id";
         private const string TYPE_FIELD = "__type";
         private readonly IndexWriter _indexWriter;
-        private ConcurrentDictionary<string, byte> _indexedFields;
         private ConcurrentDictionary<string, RadianFile> _indexedFiles;
         private bool _disposed;
 

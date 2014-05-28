@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Radian.Core
+namespace Radian.Web
 {
     public class Page
     {

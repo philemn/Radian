@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Radian.Core.Querying;
 
-namespace Radian
+namespace Radian.Blog
 {
     public class MvcApplication : System.Web.HttpApplication
     {

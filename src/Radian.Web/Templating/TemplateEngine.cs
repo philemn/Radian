@@ -1,5 +1,4 @@
-﻿using Radian.Controllers;
-using Radian.Core;
+﻿using Radian.Core;
 using Radian.Core.IO;
 using RazorEngine.Configuration;
 using RazorEngine.Templating;
@@ -9,34 +8,31 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Web;
-using System.Web.Hosting;
 
-namespace Radian
+namespace Radian.Web.Templating
 {
-    public interface IRadianTemplateEngine
+    public interface ITemplateEngine
     {
         string RenderView(string path, ExpandoObject model);
         string RenderPage(string path, Page model);
     }
 
-    public class RadianTemplateEngine : IRadianTemplateEngine
+    public class TemplateEngine : ITemplateEngine
     {
-        private static ITemplateService _viewTemplateService;
-        private static ITemplateService _pageTemplateService;
-        private static Dictionary<string, string> _viewCacheNames = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        private static Dictionary<string, string> _layoutCacheNames = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private ITemplateService _viewTemplateService;
+        private ITemplateService _pageTemplateService;
+        private Dictionary<string, string> _viewCacheNames = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private Dictionary<string, string> _layoutCacheNames = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-        static RadianTemplateEngine()
+        public TemplateEngine()
         {
-            var sitePath = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "Site");
-            var fileLocator = new FileLocator(sitePath);
-            var pageLoader = new ContentItemLoader(fileLocator);
-            var viewLoader = new ViewLoader(fileLocator);
-            var layouts = pageLoader.LoadAll<Page>(Path.Combine(sitePath, "Layouts"));
-            var pages = pageLoader.LoadAll<Page>(Path.Combine(sitePath, "Pages"));
-            var views = viewLoader.LoadAll(sitePath);
-            var pageTemplateServiceConfig = new TemplateServiceConfiguration { BaseTemplateType = typeof(RadianPageTemplate) };
-            var viewTemplateServiceConfig = new TemplateServiceConfiguration { BaseTemplateType = typeof(RadianViewTemplate) };
+            var locator = RadianConfiguration.FileLocator;
+            var viewLoader = new ViewLoader(new FileLocator(RadianConfiguration.SitePath));
+            var layouts = locator.FindFiles("Layouts").Select(x => x.GetContentItem<Page>());
+            var pages = locator.FindFiles("Pages").Select(x => x.GetContentItem<Page>());
+            var views = locator.FindFiles("Views").Select(x => new View { Path = x.Path, Template = x.GetText() });
+            var pageTemplateServiceConfig = new TemplateServiceConfiguration { BaseTemplateType = typeof(PageTemplate) };
+            var viewTemplateServiceConfig = new TemplateServiceConfiguration { BaseTemplateType = typeof(ViewTemplate) };
 
             _pageTemplateService = new TemplateService(pageTemplateServiceConfig);
             _viewTemplateService = new TemplateService(viewTemplateServiceConfig);
@@ -69,6 +65,7 @@ namespace Radian
                 _viewTemplateService.Compile(view.Template, typeof(ExpandoObject), view.Path);
             }
         }
+
         public string RenderView(string path, ExpandoObject model)
         {
             string cacheName;

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Radian.Core.IO
+namespace Radian.Web
 {
-    public class RadianView
+    public class View
     {
         public string Path { get; set; }
         public string Template { get; set; }

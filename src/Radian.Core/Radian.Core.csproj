@@ -112,10 +112,6 @@
     <Compile Include="IO\FileLocator.cs" />
     <Compile Include="IO\RadianFile.cs" />
     <Compile Include="IO\RadianFileType.cs" />
-    <Compile Include="IO\RadianView.cs" />
-    <Compile Include="IO\ViewLoader.cs" />
-    <Compile Include="Page.cs" />
-    <Compile Include="Placeholder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ContentItem.cs" />
     <Compile Include="Querying\QueryBuilder.cs" />

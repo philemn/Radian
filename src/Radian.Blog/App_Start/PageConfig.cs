@@ -1,5 +1,6 @@
 ﻿using Radian.Core;
 using Radian.Core.IO;
+using Radian.Web;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,7 +16,7 @@ namespace Radian
     {
         public static void RegisterPages(RouteCollection routes)
         {
-            var sitePath = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "Site");
+            var sitePath = RadianConfiguration.SitePath;
             var loader = new ContentItemLoader(new FileLocator(sitePath));
 
             foreach (var page in loader.LoadAll<Page>("Pages"))
