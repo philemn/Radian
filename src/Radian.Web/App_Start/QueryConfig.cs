@@ -1,13 +1,13 @@
-﻿using Radian.Core;
-using Radian.Core.Indexing;
-using Radian.Core.IO;
-using Radian.Query;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Hosting;
+using Radian.Core;
+using Radian.Core.Indexing;
+using Radian.Core.IO;
+using Radian.Core.Querying;
 
 namespace Radian
 {

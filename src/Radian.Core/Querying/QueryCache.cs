@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Radian.Query
+namespace Radian.Core.Querying
 {
     public static class QueryCache
     {

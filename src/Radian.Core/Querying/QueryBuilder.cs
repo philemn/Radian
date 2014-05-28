@@ -12,10 +12,10 @@ using System.Dynamic;
 using System.ComponentModel;
 using Radian.Core.Indexing;
 using Lucene.Net.QueryParsers;
-using Version = Lucene.Net.Util.Version;
 using Lucene.Net.Analysis.Standard;
+using Version = Lucene.Net.Util.Version;
 
-namespace Radian.Query
+namespace Radian.Core.Querying
 {
     public interface IQueryBuilder
     {
@@ -31,10 +31,11 @@ namespace Radian.Query
     using System.Collections.Generic;
     using System.Linq;
     using Radian.Core;
+    using Radian.Core.Querying;
 
-    public class CompiledContentQuery : Radian.Query.ContentQuery
+    public class CompiledContentQuery : ContentQuery
     {{
-        public CompiledContentQuery(Radian.Query.QueryConfiguration configuration) : base(configuration)
+        public CompiledContentQuery(QueryConfiguration configuration) : base(configuration)
         {{
         }}
 
@@ -69,7 +70,7 @@ namespace Radian.Query
             LogDiagnostics(emitResult.Diagnostics);
 
             var assembly = Assembly.Load(stream.GetBuffer());
-            return (IContentQuery) Activator.CreateInstance(assembly.GetTypes().First(x => typeof(IContentQuery).IsAssignableFrom(x)), configuration);
+            return (IContentQuery)Activator.CreateInstance(assembly.GetTypes().First(x => typeof(IContentQuery).IsAssignableFrom(x)), configuration);
         }
 
         private void LogDiagnostics(IEnumerable<Diagnostic> diagnostics)
@@ -87,7 +88,7 @@ namespace Radian.Query
                 var startLine = lineSpan.StartLinePosition.Line;
                 Console.WriteLine("Line {0}: {1}", startLine, d.GetMessage());
             }
-            
+
             Console.WriteLine();
 
             if (diagnostics.Any(x => x.Severity == DiagnosticSeverity.Error))

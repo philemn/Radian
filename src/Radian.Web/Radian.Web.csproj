@@ -182,10 +182,6 @@
       <Project>{5a9fb0ea-6e7b-4fb4-ab8c-c8760b01eedc}</Project>
       <Name>Radian.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Radian.Query\Radian.Query.csproj">
-      <Project>{3fd05bd8-3717-454d-9acc-5cf8d44353cb}</Project>
-      <Name>Radian.Query</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Site\Layouts\Main.layout" />

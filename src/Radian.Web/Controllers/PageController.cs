@@ -16,7 +16,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections;
 using RazorEngine.Text;
 using Radian.Core.IO;
-using Radian.Query;
+using Radian.Core.Querying;
 
 namespace Radian.Controllers
 {
