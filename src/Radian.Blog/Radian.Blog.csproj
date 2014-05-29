@@ -136,9 +136,9 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Site\Pages\Search.page" />
-    <None Include="Site\Queries\posts\postsByTagName.query" />
-    <None Include="Site\Queries\posts\recentPosts.query" />
-    <None Include="Site\Queries\posts\popularTags.query" />
+    <Content Include="Site\Queries\posts\postsByTagName.query" />
+    <Content Include="Site\Queries\posts\recentPosts.query" />
+    <Content Include="Site\Queries\posts\popularTags.query" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -184,7 +184,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Site\Layouts\Main.layout" />
+    <Content Include="Site\Layouts\Main.layout" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
