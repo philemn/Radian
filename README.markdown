@@ -8,3 +8,8 @@ There are two primary reasons why I chose to build Radian as a file-based framew
 
 - **Versioning** - There's already an awesome tool out there for versioning files (git) which works beautifully with content files on disk.
 - **Deployment** - Deploying updates is as simple as moving files: 1) git push, 2) xcopy, 3) FTP, etc.
+
+---
+## See it in action!
+
+- Radian Blog - http://radianblog.azurewebsites.net/
