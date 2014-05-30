@@ -7,5 +7,5 @@
               tag = tag.Key,
               count = tag.Count()
           })",
-	limit: 10
+	limit: 6
 }

@@ -22,12 +22,12 @@ namespace Radian
             var queryBuilder = new QueryBuilder();
             var index = new ContentItemIndex(locator, "Content");
             var configuration = new QueryConfiguration { ContentPath = contentPath, ContentItemIndex = index };
-            var files = loader.LoadAll<QueryMetadata>("Queries");
+            var queryContentItems = loader.LoadAll<QueryMetadata>("Queries");
 
-            foreach (var file in files)
+            foreach (var query in queryContentItems)
             {
-                var key = file.Path.Replace('\\', '/');
-                queries.Add(key, queryBuilder.Build(file.Data.Map, configuration));
+                var key = query.Path.Replace('\\', '/');
+                queries.Add(key, queryBuilder.Build(query.Data, configuration));
             }
         }
     }

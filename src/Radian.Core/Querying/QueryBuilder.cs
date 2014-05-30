@@ -14,19 +14,20 @@ using Radian.Core.Indexing;
 using Lucene.Net.QueryParsers;
 using Lucene.Net.Analysis.Standard;
 using Version = Lucene.Net.Util.Version;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Radian.Core.Querying
 {
     public interface IQueryBuilder
     {
-        IContentQuery Build(string query, QueryConfiguration configuration);
+        IContentQuery Build(QueryMetadata query, QueryConfiguration configuration);
     }
 
     public class QueryBuilder : IQueryBuilder
     {
-        private static string ContentQueryTemplate = @"
+        private const string ContentQueryTemplate = @"
 namespace Radian.Query
-{{
+{
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -34,21 +35,55 @@ namespace Radian.Query
     using Radian.Core.Querying;
 
     public class CompiledContentQuery : ContentQuery
-    {{
+    {
         public CompiledContentQuery(QueryConfiguration configuration) : base(configuration)
-        {{
-        }}
+        {
+        }
 
         public override IEnumerable<ContentItem> Query(IDictionary<string, object> tokens)
-        {{
-            return {0};
-        }}
-    }}
-}}";
-
-        public IContentQuery Build(string query, QueryConfiguration configuration)
         {
-            var syntaxTree = CSharpSyntaxTree.ParseText(string.Format(ContentQueryTemplate, query));
+            var query = from item in content() select item;
+            return query;
+        }
+    }
+}";
+        private static readonly SyntaxTree QuerySyntaxTree = CSharpSyntaxTree.ParseText(ContentQueryTemplate);
+
+        public IContentQuery Build(QueryMetadata query, QueryConfiguration configuration)
+        {
+            var root = QuerySyntaxTree.GetRoot();
+            var replacement = SyntaxFactory.ParseExpression(query.Map) as QueryExpressionSyntax;
+            var existing = root.DescendantNodes().OfType<QueryExpressionSyntax>().First();
+
+            if (replacement == null)
+            {
+                throw new ArgumentException("The supplied map value is not valid LINQ query expression syntax", "query");
+            }
+
+            var syntaxTree = root.ReplaceNode(existing, replacement).SyntaxTree;
+            
+            if (query.Limit.HasValue)
+            {
+                var returnStatement = syntaxTree.GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().First();
+                var newReturnStatement = SyntaxFactory.ReturnStatement(
+                    SyntaxFactory.Token(SyntaxKind.ReturnKeyword),
+                    SyntaxFactory.InvocationExpression(
+                        SyntaxFactory.MemberAccessExpression(
+                            SyntaxKind.SimpleMemberAccessExpression,
+                            SyntaxFactory.IdentifierName("query"),
+                            SyntaxFactory.IdentifierName("Take")),
+                        SyntaxFactory.ArgumentList(
+                            SyntaxFactory.SeparatedList(new[] {
+                                SyntaxFactory.Argument(
+                                    SyntaxFactory.LiteralExpression(
+                                        SyntaxKind.NumericLiteralExpression,
+                                        SyntaxFactory.Literal(query.Limit.Value)))
+                            }))),
+                    SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+                
+                syntaxTree = syntaxTree.GetRoot().ReplaceNode(returnStatement, newReturnStatement).SyntaxTree;
+            }
+
             var references = new List<MetadataReference>()
             {
                 new MetadataFileReference(typeof (object).Assembly.Location),

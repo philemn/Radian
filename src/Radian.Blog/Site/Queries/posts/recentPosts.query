@@ -1,4 +1,4 @@
 ﻿{
     map: "from item in content(\"posts\") orderby item.Data.date descending select item",
-    limit: 10
+    limit: 4
 }
