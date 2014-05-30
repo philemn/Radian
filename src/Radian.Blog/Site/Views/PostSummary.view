@@ -1,7 +1,10 @@
 ﻿<!-- the actual blog post: title/author/date/content -->
 <h1>
-  <a href="/post/@Content.id#disqus_thread">@Content.title</a>
+  <a href="/post/@Content.id">@Content.title</a>
 </h1>
+<small>
+  <a href="/post/@Content.id#disqus_thread"></a>
+</small>
 <p class="lead">
   by @Content.author
 </p>
