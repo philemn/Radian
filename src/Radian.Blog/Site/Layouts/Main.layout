@@ -105,8 +105,8 @@
     <script src="/assets/js/jquery-1.11.1.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
     <script type="text/javascript">
+      var disqus_shortname = 'radianblog';
       (function () {
-        var disqus_shortname = 'radianblog';
         var s = document.createElement('script'); s.async = true;
         s.type = 'text/javascript';
         s.src = '//' + disqus_shortname + '.disqus.com/count.js';
