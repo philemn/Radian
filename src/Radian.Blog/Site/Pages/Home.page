@@ -1,6 +1,6 @@
 ﻿{
     url: "/",
-    title: "Phil's Blog",
+    title: "Radian Blog",
 	layout: "layouts/Main.layout",
     placeholders: {
         "body": 

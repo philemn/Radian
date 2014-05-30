@@ -10,7 +10,11 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
+    @if (IsSectionDefined("PageTitle")) {
+    <title>@RenderSection("PageTitle")</title>
+    } else {
     <title>@Page.Title</title>
+    }
 
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />

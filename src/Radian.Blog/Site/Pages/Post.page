@@ -1,6 +1,5 @@
 ﻿{
     url: "/post/{postId}",
-    title: "????",
 	layout: "layouts/Main.layout",
     placeholders: {
         "body": [{
@@ -8,6 +7,10 @@
             data: "queries/posts/byPostId.query"
         }]
     }
+}
+
+@section PageTitle {
+    @Query("queries/posts/byPostId.query").First().Data.title - Radian Blog
 }
 
 @Placeholder("body")

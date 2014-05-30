@@ -1,6 +1,6 @@
 ﻿{
     url: "/search",
-    title: "Phil's Blog",
+    title: "Search Results - Radian Blog",
 	layout: "layouts/Main.layout",
     placeholders: {
         "body": 

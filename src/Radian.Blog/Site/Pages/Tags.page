@@ -1,7 +1,7 @@
 ﻿{
     url: "/tag/{tagName}",
 	layout: "layouts/Main.layout",
-    title: "Posts by Tag",
+    title: "Radian Blog",
     placeholders: {
         body: [{
             view: "views/postSummary.view",
