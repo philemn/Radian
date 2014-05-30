@@ -7,9 +7,9 @@
 }
 
 <p>
-    When I started Radian I thought that Queries would be a nice to have.  After having implemented
-    them I feel confident I feel validated in that opinion.  Radian originally existed after a few
-    hours of hacking.  I had the basics implement: Content Items, Pages, and Views.  This was
+    When I started Radian I thought that Queries would be a valuable addition.  After having implemented
+    them, I feel confident I am validated in that opinion.  Radian originally existed after a few
+    hours of hacking.  I had the basics implemented: Content Items, Pages, and Views.  This was
     arguably enough to build this blog with although it felt rather trivial.  After all, I could
     have come extremely close with a bunch of static HTML pages.  For years I have viewed Content
     Queries as a powerful piece of a CMS platform.  I knew I needed to make them work somehow.
@@ -20,10 +20,10 @@
     optionally contains any other free-form content.  Content Items, Pages, and Layouts all share
     this file format.  When I set out to define a Query file, it seemed logical to choose the same
     file format.  Queries are defined as simple JSON files.  Currently the JSON has terrible
-    property names, "map" and "limit", but these are likely to change and other properties may be
-    added if necessary.  The thought though was that it would be great to define queries in a syntax
+    property names, "map" and "limit" for example, but these are likely to change and other properties may be
+    added as necessary.  The thought though was that it would be great to define queries in a syntax
     similar to LINQ, but taking care of the tasks of parsing such a query would prove challenging ...
-    until Roslyn.
+    until <a href="http://roslyn.codeplex.com/">Roslyn</a>.
 </p>
 <p>
     I realized that with Roslyn I could build a tool that would query against Radian files on disk
