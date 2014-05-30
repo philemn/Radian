@@ -3,10 +3,13 @@ using Radian.Core.IO;
 using RazorEngine.Configuration;
 using RazorEngine.Templating;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace Radian.Web.Templating
@@ -21,8 +24,8 @@ namespace Radian.Web.Templating
     {
         private ITemplateService _viewTemplateService;
         private ITemplateService _pageTemplateService;
-        private Dictionary<string, string> _viewCacheNames = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        private Dictionary<string, string> _layoutCacheNames = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private ConcurrentDictionary<string, string> _viewCacheNames = new ConcurrentDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private ConcurrentDictionary<string, string> _layoutCacheNames = new ConcurrentDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
         public TemplateEngine()
         {
@@ -37,13 +40,13 @@ namespace Radian.Web.Templating
             _pageTemplateService = new TemplateService(pageTemplateServiceConfig);
             _viewTemplateService = new TemplateService(viewTemplateServiceConfig);
 
-            foreach (var layout in layouts)
+            Parallel.ForEach(layouts, layout =>
             {
-                _layoutCacheNames.Add(layout.Path, layout.Path);
+                _layoutCacheNames.TryAdd(layout.Path, layout.Path);
                 _pageTemplateService.Compile(layout.Content, typeof(ExpandoObject), layout.Path);
-            }
+            });
 
-            foreach (var page in pages)
+            Parallel.ForEach(pages, page =>
             {
                 if (!string.IsNullOrEmpty(page.Data.Layout))
                 {
@@ -57,13 +60,13 @@ namespace Radian.Web.Templating
                 }
 
                 _pageTemplateService.Compile(page.Content, typeof(ExpandoObject), page.Path);
-            }
+            });
 
-            foreach (var view in views)
+            Parallel.ForEach(views, view =>
             {
-                _viewCacheNames.Add(view.Path, view.Path);
+                _viewCacheNames.TryAdd(view.Path, view.Path);
                 _viewTemplateService.Compile(view.Template, typeof(ExpandoObject), view.Path);
-            }
+            });
         }
 
         public string RenderView(string path, ExpandoObject model)
