@@ -15,22 +15,15 @@
 @RenderContent()
 <hr />
 
-<!-- the comment box -->
-<div class="well">
-  <h4>Leave a Comment:</h4>
-  <form role="form">
-    <div class="form-group">
-      <textarea class="form-control" rows="3"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>
-
-<hr />
-
-<!-- the comments -->
-<h3>
-  Not a real comment
-  <small>10:41 AM on May 24, 2014</small>
-</h3>
-<p>I promise I'll get comments hooked up once I actually get this site hosted.  I should probably do that ...</p>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    var disqus_shortname = 'radianblog';
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<a href="http://disqus.com" class="dsq-brlink">
+  comments powered by <span class="logo-disqus">Disqus</span>
+</a>
